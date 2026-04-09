@@ -334,7 +334,7 @@ export function QuoteCard({
     <div
       id="quote-card"
       onClick={handleDoubleTap}
-      className={`relative w-full rounded-2xl border bg-gradient-to-br backdrop-blur-md p-4 shadow-2xl transition-all duration-500 cursor-pointer select-none ${
+      className={`relative w-full rounded-2xl border bg-gradient-to-br backdrop-blur-md p-3 shadow-2xl transition-all duration-500 cursor-pointer select-none ${
         cardGradientClass
       } ${
         isAnimating ? "opacity-0 scale-95 translate-y-4" : "opacity-100 scale-100 translate-y-0"
@@ -359,21 +359,21 @@ export function QuoteCard({
       )}
       {/* Decorative quote icon */}
       <Quote
-        className="absolute top-4 left-4 h-6 w-6 opacity-20 text-foreground"
+        className="absolute top-3 left-3 h-5 w-5 opacity-20 text-foreground"
         aria-hidden="true"
       />
 
       {/* Category badge + favorite button */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-2">
         {onToggleFavorite ? (
           <div className="relative">
             <button
               onClick={handleFavoriteClick}
-              className="flex items-center justify-center h-11 w-11 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90"
+              className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90"
               aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             >
               <Heart
-                className={`h-5 w-5 transition-all duration-300 ${
+                className={`h-4 w-4 transition-all duration-300 ${
                   isFavorite ? "fill-pink-400 text-pink-400 scale-110" : "text-white/60"
                 }`}
                 aria-hidden="true"
@@ -402,8 +402,8 @@ export function QuoteCard({
       </div>
 
       {/* Quote text */}
-      <blockquote className="mb-2">
-        <p className="font-serif text-base leading-snug text-foreground text-pretty font-medium">
+      <blockquote className="mb-1.5">
+        <p className="font-serif text-sm leading-snug text-foreground text-pretty font-medium">
           &ldquo;{quote.text}&rdquo;
         </p>
       </blockquote>
@@ -416,7 +416,7 @@ export function QuoteCard({
       </div>
 
       {/* Actions + Rating — single compact row */}
-      <div className="mt-2 pt-2 border-t border-white/10 flex items-center gap-1.5">
+      <div className="mt-1.5 pt-1.5 border-t border-white/10 flex items-center gap-1.5">
         {/* Copy */}
         <button
           onClick={() => {
@@ -446,7 +446,7 @@ export function QuoteCard({
       </div>
 
       {/* Theme Colour Picker */}
-      <div className="mt-1.5 flex items-center gap-1.5 pt-1.5 border-t border-white/10">
+      <div className="mt-1 flex items-center gap-1.5 pt-1 border-t border-white/10">
         <span className="text-[10px] text-white/40 font-sans uppercase tracking-wide flex-shrink-0">Theme</span>
         <div className="flex items-center gap-1.5">
           {CARD_THEMES.map((theme) => (
@@ -468,10 +468,10 @@ export function QuoteCard({
       </div>
 
       {/* Reflection Section - Collapsible */}
-      <div className="mt-1 pt-1.5 border-t border-white/10">
+      <div className="mt-0.5 pt-1 border-t border-white/10">
         <button
           onClick={() => setShowReflection(!showReflection)}
-          className="w-full flex items-center justify-between py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
+          className="w-full flex items-center justify-between py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
         >
           <span>✨ {reflection ? "Your Reflection" : "Add Reflection"}</span>
           <span className={`transition-transform ${showReflection ? "rotate-180" : ""}`}>▼</span>
