@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "David and Goliath",
+    "summary": "A young shepherd defeats a giant warrior with faith in God.",
+    "lesson": "With faith, even the biggest challenges can be overcome.",
+    "reference": "1 Samuel 17",
+    "category": "faith"
+  },
+  {
+    "id": 2,
+    "title": "Daniel in the Lion's Den",
+    "summary": "Daniel is thrown into a den of lions for praying to God, but God protects him.",
+    "lesson": "Stay faithful even when it is difficult.",
+    "reference": "Daniel 6",
+    "category": "faith"
+  },
+  {
+    "id": 3,
+    "title": "Joseph and His Dreams",
+    "summary": "Joseph is betrayed by his brothers but later rises to power in Egypt.",
+    "lesson": "God can turn bad situations into good.",
+    "reference": "Genesis 37–50",
+    "category": "purpose"
+  },
+  {
+    "id": 4,
+    "title": "Moses and the Red Sea",
+    "summary": "God parts the Red Sea to save the Israelites from Pharaoh.",
+    "lesson": "God makes a way where there seems to be no way.",
+    "reference": "Exodus 14",
+    "category": "deliverance"
+  },
+  {
+    "id": 5,
+    "title": "The Good Samaritan",
+    "summary": "A man helps a stranger who was ignored by others.",
+    "lesson": "Love and help others regardless of differences.",
+    "reference": "Luke 10:25–37",
+    "category": "love"
+  },
+  {
+    "id": 6,
+    "title": "Jesus Feeds the 5000",
+    "summary": "Jesus multiplies five loaves and two fish to feed thousands.",
+    "lesson": "God can multiply what little you have.",
+    "reference": "Matthew 14:13–21",
+    "category": "provision"
+  },
+  {
+    "id": 7,
+    "title": "Noah's Ark",
+    "summary": "Noah builds an ark and saves his family and animals from the flood.",
+    "lesson": "Obey God even when it doesn't make sense.",
+    "reference": "Genesis 6–9",
+    "category": "obedience"
+  },
+  {
+    "id": 8,
+    "title": "The Prodigal Son",
+    "summary": "A son leaves home, wastes everything, but is welcomed back by his father.",
+    "lesson": "God always welcomes us back with love.",
+    "reference": "Luke 15:11–32",
+    "category": "forgiveness"
+  },
+  {
+    "id": 9,
+    "title": "Peter Walks on Water",
+    "summary": "Peter walks on water toward Jesus but begins to sink when he doubts.",
+    "lesson": "Keep your focus on God, not your fears.",
+    "reference": "Matthew 14:22–33",
+    "category": "faith"
+  },
+  {
+    "id": 10,
+    "title": "The Birth of Jesus",
+    "summary": "Jesus is born in Bethlehem as the Savior of the world.",
+    "lesson": "God's promises are always fulfilled.",
+    "reference": "Luke 2:1–20",
+    "category": "hope"
+  },
+  {
+    "id": 11,
+    "title": "Joshua and the Walls of Jericho",
+    "summary": "The Israelites obey God's unusual instruction and the walls of Jericho fall.",
+    "lesson": "Obedience to God brings victory, even when it doesn't make sense.",
+    "reference": "Joshua 6",
+    "category": "obedience"
+  },
+  {
+    "id": 12,
+    "title": "Elijah and the Widow",
+    "summary": "A widow's small amount of food never runs out after she obeys God.",
+    "lesson": "God provides when we trust Him with what we have.",
+    "reference": "1 Kings 17:8–16",
+    "category": "provision"
+  },
+  {
+    "id": 13,
+    "title": "Shadrach, Meshach, and Abednego",
+    "summary": "Three men refuse to worship an idol and are thrown into fire, but God saves them.",
+    "lesson": "Stand firm in your faith no matter the pressure.",
+    "reference": "Daniel 3",
+    "category": "faith"
+  },
+  {
+    "id": 14,
+    "title": "The Woman with the Issue of Blood",
+    "summary": "A woman is healed after touching Jesus' garment in faith.",
+    "lesson": "Faith can bring healing and breakthrough.",
+    "reference": "Mark 5:25–34",
+    "category": "healing"
+  },
+  {
+    "id": 15,
+    "title": "Jesus Calms the Storm",
+    "summary": "Jesus calms a storm while His disciples are afraid.",
+    "lesson": "God brings peace in the middle of chaos.",
+    "reference": "Mark 4:35–41",
+    "category": "peace"
+  },
+  {
+    "id": 16,
+    "title": "The Lost Sheep",
+    "summary": "A shepherd leaves 99 sheep to find the one that is lost.",
+    "lesson": "You are valuable and God seeks you out.",
+    "reference": "Luke 15:3–7",
+    "category": "love"
+  },
+  {
+    "id": 17,
+    "title": "The Wise and Foolish Builders",
+    "summary": "One man builds on rock and another on sand; only one stands strong.",
+    "lesson": "Build your life on strong foundations.",
+    "reference": "Matthew 7:24–27",
+    "category": "wisdom"
+  },
+  {
+    "id": 18,
+    "title": "Paul and Silas in Prison",
+    "summary": "They worship God in prison and are miraculously freed.",
+    "lesson": "Praise God even in difficult situations.",
+    "reference": "Acts 16:25–34",
+    "category": "faith"
+  },
+  {
+    "id": 19,
+    "title": "The Rich Young Ruler",
+    "summary": "A man struggles to give up his wealth to follow Jesus.",
+    "lesson": "Do not let possessions control your heart.",
+    "reference": "Matthew 19:16–22",
+    "category": "discipline"
+  },
+  {
+    "id": 20,
+    "title": "The Ten Lepers",
+    "summary": "Jesus heals ten lepers, but only one returns to thank Him.",
+    "lesson": "Always be grateful.",
+    "reference": "Luke 17:11–19",
+    "category": "gratitude"
+  },
+  {
+    "id": 21,
+    "title": "Jesus and the Samaritan Woman",
+    "summary": "Jesus speaks to a woman and offers her living water.",
+    "lesson": "God's love is for everyone.",
+    "reference": "John 4:1–26",
+    "category": "love"
+  },
+  {
+    "id": 22,
+    "title": "The Parable of the Talents",
+    "summary": "Servants are rewarded based on how they use what they were given.",
+    "lesson": "Use your gifts wisely.",
+    "reference": "Matthew 25:14–30",
+    "category": "purpose"
+  },
+  {
+    "id": 23,
+    "title": "The Crucifixion of Jesus",
+    "summary": "Jesus sacrifices His life for humanity.",
+    "lesson": "True love involves sacrifice.",
+    "reference": "Luke 23",
+    "category": "love"
+  },
+  {
+    "id": 24,
+    "title": "The Resurrection of Jesus",
+    "summary": "Jesus rises from the dead, defeating death.",
+    "lesson": "There is always hope and new life in God.",
+    "reference": "Matthew 28",
+    "category": "hope"
+  },
+  {
+    "id": 25,
+    "title": "Abraham's Faith",
+    "summary": "Abraham trusts God's promise even when it seems impossible.",
+    "lesson": "Trust God even when you don't see the full picture.",
+    "reference": "Genesis 12–22",
+    "category": "faith"
+  }
+]

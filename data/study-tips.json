@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "The Pomodoro Technique",
+    "summary": "Study in 25-minute focused intervals with 5-minute breaks.",
+    "lesson": "Short bursts of focused work prevent burnout and improve retention.",
+    "tip": "Set a timer for 25 minutes, study intensively, then take a 5-minute break. After 4 cycles, take a longer 15-30 minute break.",
+    "category": "time-management"
+  },
+  {
+    "id": 2,
+    "title": "Spaced Repetition",
+    "summary": "Review material at increasing intervals to move it into long-term memory.",
+    "lesson": "Spacing out your study sessions makes information stick longer.",
+    "tip": "Review new material after 1 day, 3 days, 1 week, then 2 weeks for optimal retention.",
+    "category": "memory"
+  },
+  {
+    "id": 3,
+    "title": "Active Recall",
+    "summary": "Test yourself rather than just re-reading material.",
+    "lesson": "Retrieving information makes you remember it better.",
+    "tip": "Close your book and write down everything you remember. Check your answers and study the gaps.",
+    "category": "retention"
+  },
+  {
+    "id": 4,
+    "title": "The Feynman Technique",
+    "summary": "Explain concepts in simple terms as if teaching a child.",
+    "lesson": "If you can simplify complex ideas, you truly understand them.",
+    "tip": "Pick a topic, explain it simply on paper, identify gaps, and refine your explanation.",
+    "category": "understanding"
+  },
+  {
+    "id": 5,
+    "title": "Sleep for Learning",
+    "summary": "Get 7-9 hours of sleep to consolidate memories.",
+    "lesson": "Sleep is when your brain processes and stores information.",
+    "tip": "Study before bed so your brain can work on the material while you sleep.",
+    "category": "sleep"
+  },
+  {
+    "id": 6,
+    "title": "Cornell Note-Taking System",
+    "summary": "Divide your page into notes, cues, and summary sections.",
+    "lesson": "Organized notes make review and recall easier.",
+    "tip": "Draw a vertical line 2-3 inches from the left. Take notes on the right, write questions on the left, summarize at the bottom.",
+    "category": "notes"
+  },
+  {
+    "id": 7,
+    "title": "Interleaving",
+    "summary": "Mix different topics or problem types during study sessions.",
+    "lesson": "Variety forces your brain to adapt and strengthens understanding.",
+    "tip": "Instead of doing all math problems of one type, mix different types throughout your practice.",
+    "category": "variety"
+  },
+  {
+    "id": 8,
+    "title": "Teach Someone Else",
+    "summary": "Explain what you learned to a friend or family member.",
+    "lesson": "Teaching forces you to organize and clarify your thoughts.",
+    "tip": "Study a topic, then explain it to someone without notes. Their questions will reveal gaps in your knowledge.",
+    "category": "teaching"
+  },
+  {
+    "id": 9,
+    "title": "Pre-Sleep Review",
+    "summary": "Spend 5-10 minutes reviewing before bed.",
+    "lesson": "Last-minute review primes your brain for overnight consolidation.",
+    "tip": "Before sleeping, quickly review the main points of what you studied that day.",
+    "category": "memory"
+  },
+  {
+    "id": 10,
+    "title": "Create Mind Maps",
+    "summary": "Draw visual connections between concepts.",
+    "lesson": "Visual learning engages more of your brain and aids memory.",
+    "tip": "Write the main idea in the center and branch out with related concepts. Use colors and images.",
+    "category": "visualization"
+  }
+]
