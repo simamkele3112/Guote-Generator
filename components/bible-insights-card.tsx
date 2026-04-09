@@ -92,7 +92,7 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
 
   return (
     <div
-      className={`relative w-full rounded-3xl border bg-gradient-to-br backdrop-blur-md p-5 shadow-2xl transition-all duration-500 select-none ${activeTheme.cardClass} ${
+      className={`relative w-full rounded-2xl border bg-gradient-to-br backdrop-blur-md p-2.5 shadow-2xl transition-all duration-500 select-none ${activeTheme.cardClass} ${
         isAnimating ? "opacity-0 scale-95 translate-y-4" : "opacity-100 scale-100 translate-y-0"
       }`}
       role="article"
@@ -109,17 +109,17 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
       )}
 
       {/* Title and Favorite Button */}
-      <div className="flex items-start justify-between mb-2 pt-1 pr-2">
-        <h3 className="font-serif text-lg font-bold text-white flex-1">{insight.title}</h3>
+      <div className="flex items-start justify-between mb-1 pr-1">
+        <h3 className="font-serif text-sm font-bold text-white leading-tight flex-1">{insight.title}</h3>
         {onToggleFavorite && (
           <div className="relative">
             <button
               onClick={handleFavoriteClick}
-              className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90 flex-shrink-0"
+              className="flex items-center justify-center h-7 w-7 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90 flex-shrink-0"
               aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             >
               <Heart
-                className={`h-4 w-4 transition-all duration-300 ${
+                className={`h-3.5 w-3.5 transition-all duration-300 ${
                   isFavorite ? "fill-pink-400 text-pink-400 scale-110" : "text-white/60"
                 }`}
                 aria-hidden="true"
@@ -133,49 +133,38 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
       </div>
 
       {/* Category Badge */}
-      <span className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize font-sans mb-2 ${badgeClass}`}>
+      <span className={`inline-block rounded-full border px-1.5 py-0 text-[9px] font-medium capitalize font-sans leading-5 mb-1 ${badgeClass}`}>
         {insight.category}
       </span>
 
       {/* Summary - smaller and condensed */}
-      <p className="text-xs text-white/80 mb-3 leading-tight font-sans">{insight.summary}</p>
+      <p className="text-[10px] text-white/80 mb-1 leading-tight font-sans">{insight.summary}</p>
 
       {/* Bible Reference */}
-      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 mb-3">
-        <span className="text-sm">✝️</span>
-        <p className="text-xs font-semibold text-white/70 uppercase tracking-tight">{insight.reference}</p>
+      <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/5 border border-white/10 mb-1">
+        <span className="text-xs">✝️</span>
+        <p className="text-[10px] font-semibold text-white/70 uppercase tracking-tight">{insight.reference}</p>
       </div>
 
       {/* Key Lesson - condensed */}
-      <div className="mb-3">
-        <p className="text-xs font-semibold text-white/50 uppercase mb-1">Key Lesson</p>
-        <p className="text-sm font-serif text-white leading-tight italic">"{insight.lesson}"</p>
+      <div className="mb-1">
+        <p className="text-[9px] font-semibold text-white/50 uppercase mb-0.5">Key Lesson</p>
+        <p className="text-[11px] font-serif text-white leading-tight italic">"{insight.lesson}"</p>
       </div>
 
       {/* Interactive Features - Compact */}
-      <div className="mt-3 space-y-2 px-0">
+      <div className="mt-1 space-y-1 px-0">
         {/* Buttons Row - Smaller */}
-        <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
-          {/* Copy Button - Smaller */}
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => {
               navigator.clipboard.writeText(`"${insight.lesson}" — ${insight.reference}`)
               setCopied(true)
               setTimeout(() => setCopied(false), 2000)
             }}
-            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-xs text-white/70 hover:text-white/90 font-sans whitespace-nowrap"
+            className="p-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
           >
-            {copied ? (
-              <>
-                <Check className="h-3 w-3" />
-                <span className="hidden sm:inline">Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-3 w-3" />
-                <span className="hidden sm:inline">Copy</span>
-              </>
-            )}
+            {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
           </button>
 
           {/* Download Button - Smaller */}
@@ -278,11 +267,10 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
                 URL.revokeObjectURL(url)
               }, "image/png")
             }}
-            className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-xs text-white/70 hover:text-white/90 font-sans whitespace-nowrap"
+            className="p-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all font-sans"
             aria-label="Download insight as image"
           >
             <Download className="h-3 w-3" />
-            <span className="hidden sm:inline">Download</span>
           </button>
 
           {/* Share as Image Button */}
@@ -296,15 +284,14 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
         </div>
 
         {/* Theme picker */}
-        <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-          <span className="text-[10px] text-white/40 font-sans uppercase tracking-wide flex-shrink-0">Theme</span>
-          <div className="flex items-center gap-1.5 flex-wrap">
+        <div className="flex items-center gap-1 pt-1 border-t border-white/10">
+          <div className="flex items-center gap-1">
             {CARD_THEMES.map((theme) => (
               <button
                 key={theme.id}
                 onClick={(e) => { e.stopPropagation(); setSelectedThemeId(theme.id) }}
                 title={theme.name}
-                className={`h-5 w-5 rounded-full border-2 transition-all active:scale-90 ${
+                className={`h-4 w-4 rounded-full border-2 transition-all active:scale-90 ${
                   selectedThemeId === theme.id
                     ? "border-white scale-110 shadow-[0_0_6px_2px_rgba(255,255,255,0.3)]"
                     : "border-transparent hover:border-white/50 hover:scale-105"
@@ -314,28 +301,26 @@ export function BibleInsightsCard({ insight, isAnimating, isFavorite = false, on
               />
             ))}
           </div>
-          <span className="text-[10px] text-white/30 font-sans truncate flex-shrink-0">{activeTheme.name}</span>
         </div>
       </div>
 
       {/* Reflection Section - Collapsible */}
-      <div className="mt-2 pt-2 border-t border-white/10">
+      <div className="mt-1 pt-1 border-t border-white/10">
         <button
           onClick={() => setShowReflection(!showReflection)}
-          className="w-full flex items-center justify-between py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
+          className="w-full flex items-center justify-between py-0.5 text-[10px] font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
         >
           <span>✨ {reflection ? "Your Reflection" : "Add Reflection"}</span>
           <span className={`transition-transform ${showReflection ? "rotate-180" : ""}`}>▼</span>
         </button>
         {showReflection && (
-          <div className="mt-2 space-y-1">
-            <textarea
-              value={reflection || ""}
-              onChange={(e) => onReflectionChange?.(e.target.value)}
-              placeholder="What does this insight mean to you?"
-              className="w-full min-h-[72px] rounded-xl bg-white/5 border border-white/10 px-3 py-2 text-xs text-white placeholder:text-white/25 resize-none focus:outline-none focus:border-white/30 font-sans"
-            />
-          </div>
+          <textarea
+            value={reflection || ""}
+            onChange={(e) => onReflectionChange?.(e.target.value)}
+            placeholder="What does this insight mean to you?"
+            className="w-full mt-0.5 rounded-lg bg-white/5 border border-white/20 px-2 py-1 text-[10px] text-white placeholder:text-white/25 resize-none focus:outline-none focus:border-white/30 font-sans"
+            rows={2}
+          />
         )}
       </div>
     </div>
