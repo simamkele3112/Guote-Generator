@@ -693,7 +693,7 @@ export function QuoteGenerator() {
 
   return (
     <main
-      className="relative w-full h-screen flex flex-col overflow-hidden"
+      className="relative w-full h-[100dvh] flex flex-col overflow-hidden"
       style={{
         background: "linear-gradient(160deg, #1e1b4b 0%, #3b1275 30%, #6d1bb5 65%, #c2185b 100%)",
       }}
@@ -702,8 +702,8 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-pink-600/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
-      {/* Main content area - no scrolling */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pb-24 pt-6 safe-area-inset-top overflow-hidden">
+      {/* Main content area - scrollable */}
+      <div className="relative z-10 flex-1 flex flex-col items-center px-4 pb-44 pt-2 safe-area-inset-top overflow-y-auto scrollbar-hide">
         {/* Welcome back banner */}
         {welcomeMessage && (
           <div className="w-full max-w-md mb-2 px-2">
@@ -713,7 +713,7 @@ export function QuoteGenerator() {
           </div>
         )}
         {/* Top bar - streak, XP bar, daily quest, quota */}
-        <div className="w-full max-w-md flex items-center justify-between mb-3 px-2 gap-2">
+        <div className="w-full max-w-md flex items-center justify-between mb-2 px-1 gap-2">
           {/* Streak badge */}
           <div className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-2 py-1 flex-shrink-0">
             <span className="text-base">🔥</span>
@@ -759,13 +759,13 @@ export function QuoteGenerator() {
         </div>
 
         {/* Category selector - centered and aligned with quote card */}
-        <div className="w-full max-w-md mb-4 px-2">
+        <div className="w-full max-w-md mb-2 px-1">
           <CategoryFilter selected={category} onChange={handleCategoryChange} />
         </div>
 
         {/* Ad Banner - Free users only */}
         {!isPremium && (
-          <div className="w-full max-w-md mb-3 px-2">
+          <div className="w-full max-w-md mb-2 px-1">
             <AdBanner />
           </div>
         )}
@@ -801,8 +801,8 @@ export function QuoteGenerator() {
         )}
       </div>
 
-      {/* Action bar - fixed bottom */}
-      <div className="absolute bottom-20 left-0 right-0 flex justify-center z-20">
+      {/* Action bar - fixed above bottom nav, safe area aware */}
+      <div className="absolute bottom-[calc(3.75rem+env(safe-area-inset-bottom,0px))] left-0 right-0 flex justify-center z-20 px-4">
         <button
           onClick={() => {
             if (viewMode === "bible") {
@@ -1018,7 +1018,7 @@ export function QuoteGenerator() {
 
       {/* ── Combo badge ── */}
       {comboCount >= 3 && (
-        <div className="absolute bottom-[108px] left-0 right-0 flex justify-center z-30 pointer-events-none">
+        <div className="absolute bottom-[calc(7rem+env(safe-area-inset-bottom,0px))] left-0 right-0 flex justify-center z-30 pointer-events-none">
           <div className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full border text-xs font-bold animate-combo-pop ${
             comboCount >= 5
               ? "bg-yellow-500/20 border-yellow-400/50 text-yellow-300"
@@ -1031,7 +1031,7 @@ export function QuoteGenerator() {
 
       {/* ── Toast notification ── */}
       {toast && (
-        <div className="absolute bottom-[168px] left-0 right-0 flex justify-center z-50 pointer-events-none px-4">
+        <div className="absolute bottom-[calc(9.5rem+env(safe-area-inset-bottom,0px))] left-0 right-0 flex justify-center z-50 pointer-events-none px-4">
           <div className={`flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/20 bg-black/70 backdrop-blur-md text-sm font-semibold ${toast.color} animate-slide-up-toast shadow-2xl max-w-xs text-center`}>
             {toast.text}
           </div>

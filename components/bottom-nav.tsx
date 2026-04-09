@@ -28,8 +28,8 @@ export function BottomNav({ favoritesCount, onFavorites, onStats, onDonate, onMo
   ]
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-gradient-to-t from-background to-background/80 backdrop-blur-xl safe-area-inset-bottom">
-      <div className="flex items-center justify-around max-w-md mx-auto h-20 px-2">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-gradient-to-t from-background to-background/80 backdrop-blur-xl" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <div className="flex items-center justify-around max-w-md mx-auto h-[60px] px-2">
         {navItems.map((item) => {
           const Icon = item.icon
           return (
