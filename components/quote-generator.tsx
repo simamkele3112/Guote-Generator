@@ -104,6 +104,8 @@ export function QuoteGenerator() {
   const [toolbarVisible, setToolbarVisible] = useState(true)
   const lastScrollRef = useRef(0)
   const [showInstallBanner, setShowInstallBanner] = useState(false)
+  const [isAndroid, setIsAndroid] = useState(false)
+  const deferredPromptRef = useRef<any>(null)
 
   const { reflections, getReflection, saveReflection } = useReflections()
   const { achievements, unlockAchievement, updateProgress, getUnlockedCount } = useAchievements()
@@ -127,28 +129,47 @@ export function QuoteGenerator() {
     lastScrollRef.current = cur
   }, [])
 
-  // Show iOS install prompt once
+  // Show install prompt once (iOS + Android)
   useEffect(() => {
     if (typeof window === "undefined") return
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
     const isStandalone =
       (navigator as any).standalone === true ||
       window.matchMedia("(display-mode: standalone)").matches
     const dismissed = localStorage.getItem("installBannerDismissed")
-    if (isIOS && !isStandalone && !dismissed) {
+    if (isStandalone || dismissed) return
+
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
+    const android = /android/i.test(navigator.userAgent)
+    setIsAndroid(android)
+
+    if (isIOS) {
       setShowInstallBanner(true)
       const t = setTimeout(() => {
         setShowInstallBanner(false)
         localStorage.setItem("installBannerDismissed", "1")
-      }, 6000)
+      }, 7000)
       return () => clearTimeout(t)
     }
+
+    // Android: listen for Chrome install event
+    const handler = (e: Event) => {
+      e.preventDefault()
+      deferredPromptRef.current = e
+      setShowInstallBanner(true)
+    }
+    window.addEventListener("beforeinstallprompt", handler)
+    return () => window.removeEventListener("beforeinstallprompt", handler)
   }, [])
 
-  const dismissInstallBanner = useCallback(() => {
+  const dismissInstallBanner = useCallback(async () => {
+    if (isAndroid && deferredPromptRef.current) {
+      deferredPromptRef.current.prompt()
+      await deferredPromptRef.current.userChoice
+      deferredPromptRef.current = null
+    }
     setShowInstallBanner(false)
     if (typeof window !== "undefined") localStorage.setItem("installBannerDismissed", "1")
-  }, [])
+  }, [isAndroid])
 
   // ── Toast helper ──
   const showToast = useCallback((text: string, color = "text-amber-300") => {
@@ -741,16 +762,22 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
       {/* Main content area - scrollable */}
-      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-40 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide" onScroll={handleScroll}>
-        {/* iOS install prompt — shows once, auto-dismisses after 6s */}
+      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-28 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide" onScroll={handleScroll}>
+        {/* Install prompt — iOS: instructions, Android: native prompt */}
         {showInstallBanner && (
-          <div className="w-full max-w-md mb-2 px-1">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-xs text-white font-sans">
+          <div className="w-full max-w-md mb-1.5 px-1">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-indigo-500/20 border border-indigo-400/30 text-xs text-white font-sans">
               <span className="text-base flex-shrink-0">📲</span>
-              <span className="flex-1">Tap <strong>Share</strong> → <strong>Add to Home Screen</strong> to hide the address bar</span>
+              {isAndroid ? (
+                <button onClick={dismissInstallBanner} className="flex-1 text-left font-medium">
+                  Tap here to install the app — no more address bar!
+                </button>
+              ) : (
+                <span className="flex-1">Tap <strong>Share ↗</strong> → <strong>Add to Home Screen</strong> to hide the address bar</span>
+              )}
               <button
                 onClick={dismissInstallBanner}
-                className="flex-shrink-0 text-white/50 hover:text-white text-sm leading-none px-1"
+                className="flex-shrink-0 text-white/40 hover:text-white leading-none px-1"
                 aria-label="Dismiss"
               >✕</button>
             </div>
@@ -813,13 +840,13 @@ export function QuoteGenerator() {
         </div>
 
         {/* Category selector - centered and aligned with quote card */}
-        <div className="w-full max-w-md mb-2 px-1">
+        <div className="w-full max-w-md mb-1 px-1">
           <CategoryFilter selected={category} onChange={handleCategoryChange} />
         </div>
 
         {/* Ad Banner - Free users only */}
         {!isPremium && (
-          <div className="w-full max-w-md mb-2 px-1">
+          <div className="w-full max-w-md mb-1 px-1">
             <AdBanner />
           </div>
         )}
