@@ -294,12 +294,12 @@ export function QuoteCard({
   const formatCount = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : `${n}`
 
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full space-y-1">
       {/* Toggle Buttons - Quote, Bible Insights, Study Tips */}
       <div className="flex gap-1 justify-center">
         <button
           onClick={() => onViewModeChange?.("quote")}
-          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
+          className={`px-1.5 py-0 rounded-full text-[10px] font-semibold transition-all leading-5 ${
             viewMode === "quote"
               ? "bg-white/20 text-white border border-white/40"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
@@ -309,7 +309,7 @@ export function QuoteCard({
         </button>
         <button
           onClick={() => onViewModeChange?.("bible")}
-          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
+          className={`px-1.5 py-0 rounded-full text-[10px] font-semibold transition-all leading-5 ${
             viewMode === "bible"
               ? "bg-indigo-500/30 text-white border border-indigo-500/50"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
@@ -319,7 +319,7 @@ export function QuoteCard({
         </button>
         <button
           onClick={() => onViewModeChange?.("study")}
-          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
+          className={`px-1.5 py-0 rounded-full text-[10px] font-semibold transition-all leading-5 ${
             viewMode === "study"
               ? "bg-amber-500/30 text-white border border-amber-500/50"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
@@ -334,7 +334,7 @@ export function QuoteCard({
     <div
       id="quote-card"
       onClick={handleDoubleTap}
-      className={`relative w-full rounded-2xl border bg-gradient-to-br backdrop-blur-md p-3 shadow-2xl transition-all duration-500 cursor-pointer select-none ${
+      className={`relative w-full rounded-2xl border bg-gradient-to-br backdrop-blur-md p-2 shadow-2xl transition-all duration-500 cursor-pointer select-none ${
         cardGradientClass
       } ${
         isAnimating ? "opacity-0 scale-95 translate-y-4" : "opacity-100 scale-100 translate-y-0"
@@ -364,16 +364,16 @@ export function QuoteCard({
       />
 
       {/* Category badge + favorite button */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-1">
         {onToggleFavorite ? (
           <div className="relative">
             <button
               onClick={handleFavoriteClick}
-              className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90"
+              className="flex items-center justify-center h-7 w-7 rounded-full bg-white/10 border border-white/20 transition-all duration-300 hover:bg-white/20 active:scale-90"
               aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             >
               <Heart
-                className={`h-4 w-4 transition-all duration-300 ${
+                className={`h-3.5 w-3.5 transition-all duration-300 ${
                   isFavorite ? "fill-pink-400 text-pink-400 scale-110" : "text-white/60"
                 }`}
                 aria-hidden="true"
@@ -394,7 +394,7 @@ export function QuoteCard({
             </span>
           )}
           <span
-            className={`rounded-full border px-3 py-1 text-xs font-medium capitalize font-sans ${badgeClass}`}
+            className={`rounded-full border px-1.5 py-0 text-[9px] font-medium capitalize font-sans leading-5 ${badgeClass}`}
           >
             {quote.category}
           </span>
@@ -402,8 +402,8 @@ export function QuoteCard({
       </div>
 
       {/* Quote text */}
-      <blockquote className="mb-1.5">
-        <p className="font-serif text-xs leading-snug text-white/90 text-pretty font-medium">
+      <blockquote className="mb-1">
+        <p className="font-serif text-[11px] leading-tight text-white/90 text-pretty font-medium">
           &ldquo;{quote.text}&rdquo;
         </p>
       </blockquote>
@@ -412,7 +412,7 @@ export function QuoteCard({
       <p className="text-[10px] text-center text-white/40 font-sans mb-0.5">— {quote.author}</p>
 
       {/* Actions + Rating — single compact row */}
-      <div className="mt-1.5 pt-1.5 border-t border-white/10 flex items-center gap-1.5">
+      <div className="mt-1 pt-1 border-t border-white/10 flex items-center gap-1">
         {/* Copy */}
         <button
           onClick={() => {
@@ -421,18 +421,18 @@ export function QuoteCard({
             onCopyQuote?.()
             setTimeout(() => setCopied(false), 2000)
           }}
-          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
+          className="p-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
           aria-label="Copy quote"
         >
-          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
         </button>
         {/* Download */}
         <button
           onClick={handleDownload}
-          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
+          className="p-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
           aria-label="Download quote as image"
         >
-          <Download className="h-3.5 w-3.5" />
+          <Download className="h-3 w-3" />
         </button>
         {/* Share */}
         <ShareQuoteAsImageButton quote={quote} onShare={onCopyQuote} />
@@ -442,15 +442,14 @@ export function QuoteCard({
       </div>
 
       {/* Theme Colour Picker */}
-      <div className="mt-1 flex items-center gap-1.5 pt-1 border-t border-white/10">
-        <span className="text-[10px] text-white/40 font-sans uppercase tracking-wide flex-shrink-0">Theme</span>
-        <div className="flex items-center gap-1.5">
+      <div className="mt-0.5 flex items-center gap-1 pt-1 border-t border-white/10">
+        <div className="flex items-center gap-1">
           {CARD_THEMES.map((theme) => (
             <button
               key={theme.id}
               onClick={(e) => { e.stopPropagation(); setSelectedThemeId(theme.id) }}
               title={theme.name}
-              className={`h-5 w-5 rounded-full border-2 transition-all active:scale-90 ${
+              className={`h-4 w-4 rounded-full border-2 transition-all active:scale-90 ${
                 selectedThemeId === theme.id
                   ? "border-white scale-110 shadow-[0_0_6px_2px_rgba(255,255,255,0.3)]"
                   : "border-transparent hover:border-white/50 hover:scale-105"
@@ -460,14 +459,14 @@ export function QuoteCard({
             />
           ))}
         </div>
-        <span className="text-[10px] text-white/30 font-sans truncate flex-shrink-0">{activeTheme.name}</span>
+
       </div>
 
       {/* Reflection Section - Collapsible */}
-      <div className="mt-0.5 pt-1 border-t border-white/10">
+      <div className="pt-0.5 border-t border-white/10">
         <button
           onClick={() => setShowReflection(!showReflection)}
-          className="w-full flex items-center justify-between py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
+          className="w-full flex items-center justify-between py-0.5 text-[10px] font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
         >
           <span>✨ {reflection ? "Your Reflection" : "Add Reflection"}</span>
           <span className={`transition-transform ${showReflection ? "rotate-180" : ""}`}>▼</span>

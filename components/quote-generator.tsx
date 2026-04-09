@@ -778,7 +778,7 @@ export function QuoteGenerator() {
       </div>
 
       {/* Main content area — document scroll, padded top for fixed bar */}
-      <div className="relative z-10 flex flex-col items-center px-3 pb-24 pt-10">
+      <div className="relative z-10 flex flex-col items-center px-3 pb-20 pt-9">
         {/* Install prompt — the ONLY way to remove Safari address bar on iPhone */}
         {showInstallBanner && (
           <div className="w-full max-w-md mb-1 px-1">
@@ -801,8 +801,8 @@ export function QuoteGenerator() {
         )}
         {/* Welcome back banner */}
         {welcomeMessage && (
-          <div className="w-full max-w-md mb-1 px-1">
-            <div className="animate-welcome-slide flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/8 border border-white/12 text-xs font-semibold text-white font-sans">
+          <div className="w-full max-w-md mb-1">
+            <div className="animate-welcome-slide flex items-center gap-1 px-2 py-1 rounded-lg bg-white/8 border border-white/12 text-[10px] font-semibold text-white font-sans">
               {welcomeMessage}
             </div>
           </div>
@@ -867,7 +867,7 @@ export function QuoteGenerator() {
             }
           }}
           disabled={isLimitReached}
-          className={`w-full mx-4 max-w-md rounded-2xl py-2.5 font-bold transition-all duration-200 font-sans flex items-center justify-center gap-2 ${
+          className={`w-full mx-4 max-w-md rounded-xl py-2 font-bold transition-all duration-200 font-sans flex items-center justify-center gap-1.5 text-sm ${
             isLimitReached
               ? "bg-white/10 text-white/40 border border-white/10 cursor-not-allowed"
               : "bg-gradient-to-r from-primary to-pink-500 text-white shadow-lg shadow-primary/40 active:scale-95"
