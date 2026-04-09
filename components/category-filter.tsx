@@ -87,7 +87,7 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
           role="navigation"
           aria-label="Quote categories"
         >
-          <div className="flex gap-1.5 px-1 py-2 min-w-max">
+          <div className="flex gap-1 px-1 py-1 min-w-max">
             {CATEGORIES.map((cat) => {
               const isActive = selected === cat
               return (
@@ -96,14 +96,14 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
                   onClick={() => onChange(cat)}
                   aria-pressed={isActive}
                   aria-label={`Filter by ${cat}`}
-                  className={`flex items-center gap-0.5 rounded-lg px-1.5 py-1 md:px-2 md:py-1.5 text-xs font-medium transition-all duration-200 capitalize whitespace-nowrap border font-sans min-h-[28px] md:min-h-[32px] flex-shrink-0 ${
+                  className={`flex items-center gap-0.5 rounded-lg px-1.5 py-0.5 text-[11px] font-medium transition-all duration-200 capitalize whitespace-nowrap border font-sans min-h-[22px] flex-shrink-0 ${
                     isActive
                       ? "bg-gradient-to-r from-primary to-pink-500 border-primary/50 text-white shadow-lg shadow-primary/20"
                       : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20"
                   }`}
                 >
-                  <span className="text-sm">{categoryEmojis[cat]}</span>
-                  <span className="text-xs md:text-sm">{cat}</span>
+                  <span className="text-xs">{categoryEmojis[cat]}</span>
+                  <span>{cat}</span>
                 </button>
               )
             })}

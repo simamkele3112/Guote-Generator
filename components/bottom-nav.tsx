@@ -29,25 +29,25 @@ export function BottomNav({ favoritesCount, onFavorites, onStats, onDonate, onMo
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-gradient-to-t from-background to-background/80 backdrop-blur-xl" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-      <div className="flex items-center justify-around max-w-md mx-auto h-[60px] px-2">
+      <div className="flex items-center justify-around max-w-md mx-auto h-[52px] px-2">
         {navItems.map((item) => {
           const Icon = item.icon
           return (
             <button
               key={item.label}
               onClick={item.action}
-              className="relative flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-all hover:bg-white/5 rounded-lg active:bg-white/10"
+              className="relative flex flex-col items-center justify-center gap-0.5 flex-1 py-1 transition-all hover:bg-white/5 rounded-lg active:bg-white/10"
               aria-label={item.label}
             >
               <div className="relative">
-                <Icon className="h-6 w-6 text-white/70 transition-colors group-active:text-primary" />
+                <Icon className="h-5 w-5 text-white/70 transition-colors group-active:text-primary" />
                 {item.indicator !== undefined && item.indicator > 0 && (
-                  <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white">
+                  <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-pink-500 text-[9px] font-bold text-white">
                     {item.indicator > 9 ? "9+" : item.indicator}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-semibold text-white/60">{item.label}</span>
+              <span className="text-[9px] font-semibold text-white/60">{item.label}</span>
             </button>
           )
         })}

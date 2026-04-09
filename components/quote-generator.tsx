@@ -767,24 +767,24 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
       {/* Main content area - scrolls at document level, Safari auto-hides toolbar */}
-      <div className="relative z-10 flex flex-col items-center px-3 pb-32 pt-1 safe-area-inset-top">
-        {/* Install prompt — iOS: instructions, Android: native prompt */}
+      <div className="relative z-10 flex flex-col items-center px-3 pb-24 pt-1 safe-area-inset-top">
+        {/* Install prompt — the ONLY way to remove Safari address bar on iPhone */}
         {showInstallBanner && (
-          <div className="w-full max-w-md mb-1.5 px-1">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-indigo-500/20 border border-indigo-400/30 text-xs text-white font-sans">
-              <span className="text-base flex-shrink-0">📲</span>
-              {isAndroid ? (
-                <button onClick={dismissInstallBanner} className="flex-1 text-left font-medium">
-                  Tap here to install the app — no more address bar!
-                </button>
-              ) : (
-                <span className="flex-1">Tap <strong>Share ↗</strong> → <strong>Add to Home Screen</strong> to hide the address bar</span>
-              )}
-              <button
-                onClick={dismissInstallBanner}
-                className="flex-shrink-0 text-white/40 hover:text-white leading-none px-1"
-                aria-label="Dismiss"
-              >✕</button>
+          <div className="w-full max-w-md mb-1 px-1">
+            <div className="flex items-start gap-2 px-3 py-2 rounded-xl bg-indigo-500/25 border border-indigo-400/40 text-white font-sans">
+              <span className="text-base flex-shrink-0 mt-0.5">📱</span>
+              <div className="flex-1 min-w-0">
+                {isAndroid ? (
+                  <button onClick={dismissInstallBanner} className="text-xs font-semibold text-left w-full">
+                    ↡ Tap to install — runs full screen, no browser bar!
+                  </button>
+                ) : (
+                  <p className="text-[11px] leading-tight">
+                    <span className="font-bold">Remove address bar:</span> tap 📤 Share › "Add to Home Screen" › Add. Opens full screen, no Safari bar.
+                  </p>
+                )}
+              </div>
+              <button onClick={dismissInstallBanner} className="flex-shrink-0 text-white/40 hover:text-white leading-none text-sm">✕</button>
             </div>
           </div>
         )}
@@ -797,12 +797,12 @@ export function QuoteGenerator() {
           </div>
         )}
         {/* Top bar - streak, XP bar, daily quest, quota — auto-hides on scroll down */}
-        <div className={`w-full max-w-md transition-all duration-300 overflow-hidden ${toolbarVisible ? 'max-h-16 opacity-100 mb-2' : 'max-h-0 opacity-0 mb-0'}`}>
+        <div className={`w-full max-w-md transition-all duration-300 overflow-hidden ${toolbarVisible ? 'max-h-10 opacity-100 mb-1' : 'max-h-0 opacity-0 mb-0'}`}>
         <div className="flex items-center justify-between px-1 gap-2">
           {/* Streak badge */}
-          <div className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-2 py-1 flex-shrink-0">
-            <span className="text-base">🔥</span>
-            <span className="text-xs font-semibold text-white font-sans">{streak}</span>
+          <div className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-2 py-0.5 flex-shrink-0">
+            <span className="text-sm">🔥</span>
+            <span className="text-[10px] font-semibold text-white font-sans">{streak}</span>
           </div>
 
           {/* XP level bar - center */}
@@ -891,8 +891,8 @@ export function QuoteGenerator() {
         )}
       </div>
 
-      {/* Action bar - fixed above bottom nav, safe area aware */}
-      <div className="absolute bottom-[calc(3.75rem+env(safe-area-inset-bottom,0px))] left-0 right-0 flex justify-center z-20 px-4">
+      {/* Action bar - FIXED above bottom nav */}
+      <div className="fixed bottom-[calc(3.25rem+env(safe-area-inset-bottom,0px))] left-0 right-0 flex justify-center z-20 px-4">
         <button
           onClick={() => {
             if (viewMode === "bible") {
@@ -904,7 +904,7 @@ export function QuoteGenerator() {
             }
           }}
           disabled={isLimitReached}
-          className={`w-full mx-4 max-w-md rounded-2xl py-4 font-bold transition-all duration-200 font-sans flex items-center justify-center gap-2 ${
+          className={`w-full mx-4 max-w-md rounded-2xl py-2.5 font-bold transition-all duration-200 font-sans flex items-center justify-center gap-2 ${
             isLimitReached
               ? "bg-white/10 text-white/40 border border-white/10 cursor-not-allowed"
               : "bg-gradient-to-r from-primary to-pink-500 text-white shadow-lg shadow-primary/40 active:scale-95"

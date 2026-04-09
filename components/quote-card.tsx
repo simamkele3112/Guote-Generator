@@ -296,10 +296,10 @@ export function QuoteCard({
   return (
     <div className="w-full space-y-2">
       {/* Toggle Buttons - Quote, Bible Insights, Study Tips */}
-      <div className="flex gap-1.5 justify-center">
+      <div className="flex gap-1 justify-center">
         <button
           onClick={() => onViewModeChange?.("quote")}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
             viewMode === "quote"
               ? "bg-white/20 text-white border border-white/40"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
@@ -309,23 +309,23 @@ export function QuoteCard({
         </button>
         <button
           onClick={() => onViewModeChange?.("bible")}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
             viewMode === "bible"
               ? "bg-indigo-500/30 text-white border border-indigo-500/50"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
           }`}
         >
-          📖 Bible Insights
+          📖 Bible
         </button>
         <button
           onClick={() => onViewModeChange?.("study")}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
             viewMode === "study"
               ? "bg-amber-500/30 text-white border border-amber-500/50"
               : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
           }`}
         >
-          🧠 Study Tips
+          🧠 Study
         </button>
       </div>
 
