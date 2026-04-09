@@ -101,8 +101,6 @@ export function QuoteGenerator() {
   const [levelUpNum, setLevelUpNum] = useState<number | null>(null)
   const [welcomeMessage, setWelcomeMessage] = useState<string | null>(null)
   const [questTimeLeft, setQuestTimeLeft] = useState("")
-  const [toolbarVisible, setToolbarVisible] = useState(true)
-  const lastScrollRef = useRef(0)
   const [showInstallBanner, setShowInstallBanner] = useState(false)
   const [isAndroid, setIsAndroid] = useState(false)
   const deferredPromptRef = useRef<any>(null)
@@ -116,23 +114,6 @@ export function QuoteGenerator() {
   const currentStudyTip = studyTipsData[currentStudyTipIndex]
   const quoteOfDayId = (quotesData as Quote[])[Math.floor(Date.now() / 86400000) % (quotesData as Quote[]).length].id
   const isQuoteOfDay = quote?.id === quoteOfDayId
-
-  // Window-level scroll — makes iOS Safari auto-hide its address bar
-  useEffect(() => {
-    const onScroll = () => {
-      const cur = window.scrollY
-      if (cur < 10) {
-        setToolbarVisible(true)
-      } else if (cur > lastScrollRef.current + 8) {
-        setToolbarVisible(false)
-      } else if (cur < lastScrollRef.current - 8) {
-        setToolbarVisible(true)
-      }
-      lastScrollRef.current = cur
-    }
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
 
   // Show install prompt once (iOS + Android)
   useEffect(() => {
@@ -766,8 +747,38 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-pink-600/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
-      {/* Main content area - scrolls at document level, Safari auto-hides toolbar */}
-      <div className="relative z-10 flex flex-col items-center px-3 pb-24 pt-1 safe-area-inset-top">
+      {/* Fixed top bar — always visible, streak / XP / quest / quota */}
+      <div className="fixed top-0 left-0 right-0 z-30 safe-area-inset-top">
+        <div className="flex items-center max-w-md mx-auto px-3 gap-2 h-9 bg-gradient-to-b from-[#1e1b4b]/90 to-transparent backdrop-blur-sm">
+          {/* Streak */}
+          <div className="flex items-center gap-0.5 rounded-full bg-white/10 border border-white/15 px-1.5 py-0.5 flex-shrink-0">
+            <span className="text-xs">🔥</span>
+            <span className="text-[9px] font-bold text-white font-sans">{streak}</span>
+          </div>
+          {/* XP bar */}
+          <div className="flex-1 flex items-center gap-1 min-w-0">
+            <span className="text-[9px] font-bold text-white/50 font-sans whitespace-nowrap">Lv{level}</span>
+            <div className="flex-1 h-1 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700" style={{ width: `${xp % 100}%` }} />
+            </div>
+          </div>
+          {/* Quest dots */}
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {[dailyReads >= 5, dailyShares >= 1, dailySaves >= 1].map((done, i) => (
+              <div key={i} className={`h-1.5 w-1.5 rounded-full ${ done ? "bg-green-400" : "bg-white/20"}`} />
+            ))}
+          </div>
+          {/* Quota */}
+          {!isPremium && (
+            <span className={`text-[9px] font-medium flex-shrink-0 ${ totalContentViewed >= FREE_LIMIT * 0.8 ? "text-red-400" : "text-white/40"}`}>
+              {totalContentViewed}/{FREE_LIMIT}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Main content area — document scroll, padded top for fixed bar */}
+      <div className="relative z-10 flex flex-col items-center px-3 pb-24 pt-10">
         {/* Install prompt — the ONLY way to remove Safari address bar on iPhone */}
         {showInstallBanner && (
           <div className="w-full max-w-md mb-1 px-1">
@@ -796,54 +807,6 @@ export function QuoteGenerator() {
             </div>
           </div>
         )}
-        {/* Top bar - streak, XP bar, daily quest, quota — auto-hides on scroll down */}
-        <div className={`w-full max-w-md transition-all duration-300 overflow-hidden ${toolbarVisible ? 'max-h-10 opacity-100 mb-1' : 'max-h-0 opacity-0 mb-0'}`}>
-        <div className="flex items-center justify-between px-1 gap-2">
-          {/* Streak badge */}
-          <div className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-2 py-0.5 flex-shrink-0">
-            <span className="text-sm">🔥</span>
-            <span className="text-[10px] font-semibold text-white font-sans">{streak}</span>
-          </div>
-
-          {/* XP level bar - center */}
-          <div className="flex-1 flex items-center gap-1.5 min-w-0">
-            <span className="text-[10px] font-bold text-white/60 font-sans whitespace-nowrap">Lv.{level}</span>
-            <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-700 ease-out animate-xp-fill"
-                style={{ width: `${xp % 100}%` }}
-              />
-            </div>
-            <span className="text-[10px] text-white/35 font-sans whitespace-nowrap">{xp % 100}/100</span>
-          </div>
-
-          {/* Daily quest dots (3 tasks: 5 reads, 1 share, 1 save) */}
-          <div className="flex flex-col items-end gap-0.5 flex-shrink-0">
-            <div className="flex items-center gap-1">
-              <span className="text-[9px] text-white/35 font-sans">Quest</span>
-              {[dailyReads >= 5, dailyShares >= 1, dailySaves >= 1].map((done, i) => (
-                <div
-                  key={i}
-                  className={`h-2 w-2 rounded-full transition-all ${done ? "bg-green-400 shadow-[0_0_4px_1px_rgba(74,222,128,0.6)]" : "bg-white/20"}`}
-                />
-              ))}
-            </div>
-            {!(dailyReads >= 5 && dailyShares >= 1 && dailySaves >= 1) && questTimeLeft && (
-              <span className="text-[7px] text-white/20 font-sans">{questTimeLeft}</span>
-            )}
-          </div>
-
-          {/* Quota indicator */}
-          {!isPremium && (
-            <div className={`text-xs font-medium bg-white/5 px-2 py-1 rounded-lg flex-shrink-0 ${
-              totalContentViewed >= FREE_LIMIT * 0.8 ? "text-red-400" : "text-white/60"
-            }`}>
-              {totalContentViewed}/{FREE_LIMIT}
-            </div>
-          )}
-        </div>
-        </div>
-
         {/* Category selector - centered and aligned with quote card */}
         <div className="w-full max-w-md mb-1 px-1">
           <CategoryFilter selected={category} onChange={handleCategoryChange} />
