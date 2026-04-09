@@ -14,9 +14,15 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Quote Generator App — by Sima',
+  title: 'Goute Generator',
   description: 'Discover inspiring quotes for success, motivation, discipline, love, faith, life, and money. Share and download beautiful quote cards.',
   generator: 'Quote Generator App',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Goute Generator',
+  },
   icons: {
     icon: [
       {

@@ -703,11 +703,11 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
       {/* Main content area - scrollable */}
-      <div className="relative z-10 flex-1 flex flex-col items-center px-4 pb-44 pt-2 safe-area-inset-top overflow-y-auto scrollbar-hide">
+      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-40 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide">
         {/* Welcome back banner */}
         {welcomeMessage && (
-          <div className="w-full max-w-md mb-2 px-2">
-            <div className="animate-welcome-slide flex items-center gap-2 px-3 py-2 rounded-xl bg-white/8 border border-white/12 text-xs font-semibold text-white font-sans">
+          <div className="w-full max-w-md mb-1 px-1">
+            <div className="animate-welcome-slide flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/8 border border-white/12 text-xs font-semibold text-white font-sans">
               {welcomeMessage}
             </div>
           </div>
