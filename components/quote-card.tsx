@@ -35,6 +35,10 @@ interface QuoteCardProps {
   currentStudyTip?: any
   studyFavorite?: boolean
   onToggleStudyFavorite?: () => void
+  bibleReflection?: string
+  onBibleReflectionChange?: (text: string) => void
+  studyReflection?: string
+  onStudyReflectionChange?: (text: string) => void
   isGolden?: boolean
   isQuoteOfDay?: boolean
 }
@@ -107,7 +111,11 @@ export function QuoteCard({
   onToggleBibleFavorite,
   currentStudyTip,
   studyFavorite = false,
-  onToggleStudyFavorite
+  onToggleStudyFavorite,
+  bibleReflection,
+  onBibleReflectionChange,
+  studyReflection,
+  onStudyReflectionChange
 }: QuoteCardProps) {
   const [copied, setCopied] = useState(false)
   const [showReflection, setShowReflection] = useState(false)
@@ -514,6 +522,8 @@ export function QuoteCard({
           isAnimating={isAnimating}
           isFavorite={bibleFavorite}
           onToggleFavorite={onToggleBibleFavorite}
+          reflection={bibleReflection}
+          onReflectionChange={onBibleReflectionChange}
         />
       )}
 
@@ -524,6 +534,8 @@ export function QuoteCard({
           isAnimating={isAnimating}
           isFavorite={studyFavorite}
           onToggleFavorite={onToggleStudyFavorite}
+          reflection={studyReflection}
+          onReflectionChange={onStudyReflectionChange}
         />
       )}
     </div>

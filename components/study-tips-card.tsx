@@ -19,6 +19,8 @@ interface StudyTipsCardProps {
   isAnimating: boolean
   isFavorite?: boolean
   onToggleFavorite?: () => void
+  reflection?: string
+  onReflectionChange?: (text: string) => void
 }
 
 // Confetti for favorites
@@ -70,9 +72,10 @@ function useConfetti() {
   return { particles, burst }
 }
 
-export function StudyTipsCard({ tip, isAnimating, isFavorite = false, onToggleFavorite }: StudyTipsCardProps) {
+export function StudyTipsCard({ tip, isAnimating, isFavorite = false, onToggleFavorite, reflection, onReflectionChange }: StudyTipsCardProps) {
   const [copied, setCopied] = useState(false)
   const [showBigHeart, setShowBigHeart] = useState(false)
+  const [showReflection, setShowReflection] = useState(false)
   const [selectedThemeId, setSelectedThemeId] = useState("sunset")
   const { particles, burst } = useConfetti()
   const activeTheme = CARD_THEMES.find((t) => t.id === selectedThemeId) ?? CARD_THEMES[0]
@@ -324,6 +327,27 @@ export function StudyTipsCard({ tip, isAnimating, isFavorite = false, onToggleFa
           </div>
           <span className="text-[10px] text-white/30 font-sans truncate flex-shrink-0">{activeTheme.name}</span>
         </div>
+      </div>
+
+      {/* Reflection Section - Collapsible */}
+      <div className="mt-2 pt-2 border-t border-white/10">
+        <button
+          onClick={() => setShowReflection(!showReflection)}
+          className="w-full flex items-center justify-between py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-white transition-colors"
+        >
+          <span>✨ {reflection ? "Your Reflection" : "Add Reflection"}</span>
+          <span className={`transition-transform ${showReflection ? "rotate-180" : ""}`}>▼</span>
+        </button>
+        {showReflection && (
+          <div className="mt-2 space-y-1">
+            <textarea
+              value={reflection || ""}
+              onChange={(e) => onReflectionChange?.(e.target.value)}
+              placeholder="How will you apply this tip?"
+              className="w-full min-h-[72px] rounded-xl bg-white/5 border border-white/10 px-3 py-2 text-xs text-white placeholder:text-white/25 resize-none focus:outline-none focus:border-white/30 font-sans"
+            />
+          </div>
+        )}
       </div>
     </div>
   )

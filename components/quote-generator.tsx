@@ -101,6 +101,8 @@ export function QuoteGenerator() {
   const [levelUpNum, setLevelUpNum] = useState<number | null>(null)
   const [welcomeMessage, setWelcomeMessage] = useState<string | null>(null)
   const [questTimeLeft, setQuestTimeLeft] = useState("")
+  const [toolbarVisible, setToolbarVisible] = useState(true)
+  const lastScrollRef = useRef(0)
 
   const { reflections, getReflection, saveReflection } = useReflections()
   const { achievements, unlockAchievement, updateProgress, getUnlockedCount } = useAchievements()
@@ -111,6 +113,18 @@ export function QuoteGenerator() {
   const currentStudyTip = studyTipsData[currentStudyTipIndex]
   const quoteOfDayId = (quotesData as Quote[])[Math.floor(Date.now() / 86400000) % (quotesData as Quote[]).length].id
   const isQuoteOfDay = quote?.id === quoteOfDayId
+
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const cur = e.currentTarget.scrollTop
+    if (cur < 10) {
+      setToolbarVisible(true)
+    } else if (cur > lastScrollRef.current + 8) {
+      setToolbarVisible(false)
+    } else if (cur < lastScrollRef.current - 8) {
+      setToolbarVisible(true)
+    }
+    lastScrollRef.current = cur
+  }, [])
 
   // ── Toast helper ──
   const showToast = useCallback((text: string, color = "text-amber-300") => {
@@ -703,7 +717,7 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
       {/* Main content area - scrollable */}
-      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-40 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide">
+      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-40 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide" onScroll={handleScroll}>
         {/* Welcome back banner */}
         {welcomeMessage && (
           <div className="w-full max-w-md mb-1 px-1">
@@ -712,8 +726,9 @@ export function QuoteGenerator() {
             </div>
           </div>
         )}
-        {/* Top bar - streak, XP bar, daily quest, quota */}
-        <div className="w-full max-w-md flex items-center justify-between mb-2 px-1 gap-2">
+        {/* Top bar - streak, XP bar, daily quest, quota — auto-hides on scroll down */}
+        <div className={`w-full max-w-md transition-all duration-300 overflow-hidden ${toolbarVisible ? 'max-h-16 opacity-100 mb-2' : 'max-h-0 opacity-0 mb-0'}`}>
+        <div className="flex items-center justify-between px-1 gap-2">
           {/* Streak badge */}
           <div className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-2 py-1 flex-shrink-0">
             <span className="text-base">🔥</span>
@@ -757,6 +772,7 @@ export function QuoteGenerator() {
             </div>
           )}
         </div>
+        </div>
 
         {/* Category selector - centered and aligned with quote card */}
         <div className="w-full max-w-md mb-2 px-1">
@@ -787,9 +803,13 @@ export function QuoteGenerator() {
               currentBibleInsight={bibleInsightsData[currentBibleInsightIndex]}
               bibleFavorite={bibleFavorites.has(bibleInsightsData[currentBibleInsightIndex]?.id || 0)}
               onToggleBibleFavorite={handleToggleBibleFavorite}
+              bibleReflection={getReflection(10000 + (bibleInsightsData[currentBibleInsightIndex]?.id || 0))}
+              onBibleReflectionChange={(text) => saveReflection(10000 + (bibleInsightsData[currentBibleInsightIndex]?.id || 0), text)}
               currentStudyTip={studyTipsData[currentStudyTipIndex]}
               studyFavorite={studyFavorites.has(studyTipsData[currentStudyTipIndex]?.id || 0)}
               onToggleStudyFavorite={handleToggleStudyFavorite}
+              studyReflection={getReflection(20000 + (studyTipsData[currentStudyTipIndex]?.id || 0))}
+              onStudyReflectionChange={(text) => saveReflection(20000 + (studyTipsData[currentStudyTipIndex]?.id || 0), text)}
               isGolden={isGoldenQuote && viewMode === "quote"}
               isQuoteOfDay={isQuoteOfDay && viewMode === "quote"}
             />
