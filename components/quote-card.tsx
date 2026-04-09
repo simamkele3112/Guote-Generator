@@ -402,8 +402,8 @@ export function QuoteCard({
       </div>
 
       {/* Quote text */}
-      <blockquote className="mb-3">
-        <p className="font-serif text-lg leading-snug text-foreground text-pretty font-medium">
+      <blockquote className="mb-2">
+        <p className="font-serif text-base leading-snug text-foreground text-pretty font-medium">
           &ldquo;{quote.text}&rdquo;
         </p>
       </blockquote>
@@ -411,83 +411,60 @@ export function QuoteCard({
       {/* Author */}
       <div className="flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
-        <p className="text-sm font-medium text-muted-foreground font-sans">{quote.author}</p>
+        <p className="text-xs font-medium text-muted-foreground font-sans">{quote.author}</p>
         <div className="h-px flex-1 bg-border" />
       </div>
-      <p className="text-center text-[10px] text-white/25 mt-1 font-sans">
-        ❤️ {formatCount(resonateCount)} people resonated with this
-      </p>
 
-      {/* Interactive Features - Clean Horizontal Layout */}
-      <div className="mt-2 space-y-2 px-1">
-        {/* Buttons Row - Horizontal */}
-        <div className="flex items-center gap-2 flex-wrap justify-center">
-          {/* Copy Button */}
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(`"${quote.text}" — ${quote.author}`)
-              setCopied(true)
-              onCopyQuote?.()
-              setTimeout(() => setCopied(false), 2000)
-            }}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-xs text-white/70 hover:text-white/90 font-sans whitespace-nowrap"
-          >
-            {copied ? (
-              <>
-                <Check className="h-3 w-3" />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-3 w-3" />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
+      {/* Actions + Rating — single compact row */}
+      <div className="mt-2 pt-2 border-t border-white/10 flex items-center gap-1.5">
+        {/* Copy */}
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(`"${quote.text}" — ${quote.author}`)
+            setCopied(true)
+            onCopyQuote?.()
+            setTimeout(() => setCopied(false), 2000)
+          }}
+          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
+          aria-label="Copy quote"
+        >
+          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+        </button>
+        {/* Download */}
+        <button
+          onClick={handleDownload}
+          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white/90 transition-all"
+          aria-label="Download quote as image"
+        >
+          <Download className="h-3.5 w-3.5" />
+        </button>
+        {/* Share */}
+        <ShareQuoteAsImageButton quote={quote} onShare={onCopyQuote} />
+        <div className="flex-1" />
+        {/* Star Rating inline */}
+        <QuoteRating quoteId={quote.id} />
+      </div>
 
-          {/* Download Button */}
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-xs text-white/70 hover:text-white/90 font-sans whitespace-nowrap"
-            aria-label="Download quote as image"
-          >
-            <Download className="h-3 w-3" />
-            <span>Download</span>
-          </button>
-
-          {/* Share as Image Button */}
-          <ShareQuoteAsImageButton
-            quote={quote}
-            onShare={onCopyQuote}
-          />
+      {/* Theme Colour Picker */}
+      <div className="mt-1.5 flex items-center gap-1.5 pt-1.5 border-t border-white/10">
+        <span className="text-[10px] text-white/40 font-sans uppercase tracking-wide flex-shrink-0">Theme</span>
+        <div className="flex items-center gap-1.5">
+          {CARD_THEMES.map((theme) => (
+            <button
+              key={theme.id}
+              onClick={(e) => { e.stopPropagation(); setSelectedThemeId(theme.id) }}
+              title={theme.name}
+              className={`h-5 w-5 rounded-full border-2 transition-all active:scale-90 ${
+                selectedThemeId === theme.id
+                  ? "border-white scale-110 shadow-[0_0_6px_2px_rgba(255,255,255,0.3)]"
+                  : "border-transparent hover:border-white/50 hover:scale-105"
+              }`}
+              style={{ backgroundColor: theme.swatch }}
+              aria-label={theme.name}
+            />
+          ))}
         </div>
-
-        {/* Rating Row */}
-        <div className="flex items-center justify-center pt-1 border-t border-white/10">
-          <QuoteRating quoteId={quote.id} />
-        </div>
-
-        {/* Theme Colour Picker */}
-        <div className="flex items-center gap-1.5 pt-1.5 border-t border-white/10">
-          <span className="text-[10px] text-white/40 font-sans uppercase tracking-wide flex-shrink-0">Theme</span>
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {CARD_THEMES.map((theme) => (
-              <button
-                key={theme.id}
-                onClick={(e) => { e.stopPropagation(); setSelectedThemeId(theme.id) }}
-                title={theme.name}
-                className={`h-5 w-5 rounded-full border-2 transition-all active:scale-90 ${
-                  selectedThemeId === theme.id
-                    ? "border-white scale-110 shadow-[0_0_6px_2px_rgba(255,255,255,0.3)]"
-                    : "border-transparent hover:border-white/50 hover:scale-105"
-                }`}
-                style={{ backgroundColor: theme.swatch }}
-                aria-label={theme.name}
-              />
-            ))}
-          </div>
-          <span className="text-[10px] text-white/30 font-sans truncate flex-shrink-0">{activeTheme.name}</span>
-        </div>
+        <span className="text-[10px] text-white/30 font-sans truncate flex-shrink-0">{activeTheme.name}</span>
       </div>
 
       {/* Reflection Section - Collapsible */}

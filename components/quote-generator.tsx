@@ -103,6 +103,7 @@ export function QuoteGenerator() {
   const [questTimeLeft, setQuestTimeLeft] = useState("")
   const [toolbarVisible, setToolbarVisible] = useState(true)
   const lastScrollRef = useRef(0)
+  const [showInstallBanner, setShowInstallBanner] = useState(false)
 
   const { reflections, getReflection, saveReflection } = useReflections()
   const { achievements, unlockAchievement, updateProgress, getUnlockedCount } = useAchievements()
@@ -124,6 +125,29 @@ export function QuoteGenerator() {
       setToolbarVisible(true)
     }
     lastScrollRef.current = cur
+  }, [])
+
+  // Show iOS install prompt once
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
+    const isStandalone =
+      (navigator as any).standalone === true ||
+      window.matchMedia("(display-mode: standalone)").matches
+    const dismissed = localStorage.getItem("installBannerDismissed")
+    if (isIOS && !isStandalone && !dismissed) {
+      setShowInstallBanner(true)
+      const t = setTimeout(() => {
+        setShowInstallBanner(false)
+        localStorage.setItem("installBannerDismissed", "1")
+      }, 6000)
+      return () => clearTimeout(t)
+    }
+  }, [])
+
+  const dismissInstallBanner = useCallback(() => {
+    setShowInstallBanner(false)
+    if (typeof window !== "undefined") localStorage.setItem("installBannerDismissed", "1")
   }, [])
 
   // ── Toast helper ──
@@ -718,6 +742,20 @@ export function QuoteGenerator() {
 
       {/* Main content area - scrollable */}
       <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-40 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide" onScroll={handleScroll}>
+        {/* iOS install prompt — shows once, auto-dismisses after 6s */}
+        {showInstallBanner && (
+          <div className="w-full max-w-md mb-2 px-1">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/20 text-xs text-white font-sans">
+              <span className="text-base flex-shrink-0">📲</span>
+              <span className="flex-1">Tap <strong>Share</strong> → <strong>Add to Home Screen</strong> to hide the address bar</span>
+              <button
+                onClick={dismissInstallBanner}
+                className="flex-shrink-0 text-white/50 hover:text-white text-sm leading-none px-1"
+                aria-label="Dismiss"
+              >✕</button>
+            </div>
+          </div>
+        )}
         {/* Welcome back banner */}
         {welcomeMessage && (
           <div className="w-full max-w-md mb-1 px-1">
