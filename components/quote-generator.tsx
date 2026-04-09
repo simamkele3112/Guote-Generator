@@ -812,12 +812,7 @@ export function QuoteGenerator() {
           <CategoryFilter selected={category} onChange={handleCategoryChange} />
         </div>
 
-        {/* Ad Banner - Free users only */}
-        {!isPremium && (
-          <div className="w-full max-w-md mb-1 px-1">
-            <AdBanner />
-          </div>
-        )}
+        
 
         {/* Main quote card - centered and prominent */}
         {quote ? (
