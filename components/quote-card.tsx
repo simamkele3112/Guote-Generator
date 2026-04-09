@@ -403,17 +403,13 @@ export function QuoteCard({
 
       {/* Quote text */}
       <blockquote className="mb-1.5">
-        <p className="font-serif text-sm leading-snug text-foreground text-pretty font-medium">
+        <p className="font-serif text-xs leading-snug text-white/90 text-pretty font-medium">
           &ldquo;{quote.text}&rdquo;
         </p>
       </blockquote>
 
       {/* Author */}
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-border" />
-        <p className="text-xs font-medium text-muted-foreground font-sans">{quote.author}</p>
-        <div className="h-px flex-1 bg-border" />
-      </div>
+      <p className="text-[10px] text-center text-white/40 font-sans mb-0.5">— {quote.author}</p>
 
       {/* Actions + Rating — single compact row */}
       <div className="mt-1.5 pt-1.5 border-t border-white/10 flex items-center gap-1.5">
@@ -478,15 +474,13 @@ export function QuoteCard({
         </button>
 
         {showReflection && (
-          <div className="mt-2 space-y-1">
-            <textarea
-              value={reflection || ""}
-              onChange={(e) => onReflectionChange?.(e.target.value)}
-              placeholder="What does this quote mean to you?"
-              className="w-full rounded-lg bg-white/5 border border-white/20 px-2 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/30 resize-vertical font-sans overflow-y-auto max-h-32"
-              rows={4}
-            />
-          </div>
+          <textarea
+            value={reflection || ""}
+            onChange={(e) => onReflectionChange?.(e.target.value)}
+            placeholder="What does this quote mean to you?"
+            className="w-full mt-1 rounded-lg bg-white/5 border border-white/20 px-2 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/30 resize-none font-sans"
+            rows={2}
+          />
         )}
       </div>
     </div>

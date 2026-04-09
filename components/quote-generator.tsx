@@ -117,16 +117,21 @@ export function QuoteGenerator() {
   const quoteOfDayId = (quotesData as Quote[])[Math.floor(Date.now() / 86400000) % (quotesData as Quote[]).length].id
   const isQuoteOfDay = quote?.id === quoteOfDayId
 
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const cur = e.currentTarget.scrollTop
-    if (cur < 10) {
-      setToolbarVisible(true)
-    } else if (cur > lastScrollRef.current + 8) {
-      setToolbarVisible(false)
-    } else if (cur < lastScrollRef.current - 8) {
-      setToolbarVisible(true)
+  // Window-level scroll — makes iOS Safari auto-hide its address bar
+  useEffect(() => {
+    const onScroll = () => {
+      const cur = window.scrollY
+      if (cur < 10) {
+        setToolbarVisible(true)
+      } else if (cur > lastScrollRef.current + 8) {
+        setToolbarVisible(false)
+      } else if (cur < lastScrollRef.current - 8) {
+        setToolbarVisible(true)
+      }
+      lastScrollRef.current = cur
     }
-    lastScrollRef.current = cur
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   // Show install prompt once (iOS + Android)
@@ -752,7 +757,7 @@ export function QuoteGenerator() {
 
   return (
     <main
-      className="relative w-full h-[100dvh] flex flex-col overflow-hidden"
+      className="relative w-full min-h-[100dvh] flex flex-col"
       style={{
         background: "linear-gradient(160deg, #1e1b4b 0%, #3b1275 30%, #6d1bb5 65%, #c2185b 100%)",
       }}
@@ -761,8 +766,8 @@ export function QuoteGenerator() {
       <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-pink-600/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-40 left-0 h-56 w-56 rounded-full bg-violet-700/20 blur-3xl" />
 
-      {/* Main content area - scrollable */}
-      <div className="relative z-10 flex-1 flex flex-col items-center px-3 pb-28 pt-1 safe-area-inset-top overflow-y-auto scrollbar-hide" onScroll={handleScroll}>
+      {/* Main content area - scrolls at document level, Safari auto-hides toolbar */}
+      <div className="relative z-10 flex flex-col items-center px-3 pb-32 pt-1 safe-area-inset-top">
         {/* Install prompt — iOS: instructions, Android: native prompt */}
         {showInstallBanner && (
           <div className="w-full max-w-md mb-1.5 px-1">
