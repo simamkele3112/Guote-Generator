@@ -738,7 +738,7 @@ export function QuoteGenerator() {
 
   return (
     <main
-      className="relative w-full min-h-[100dvh] flex flex-col"
+      className="relative w-full min-h-screen min-h-[100dvh] flex flex-col"
       style={{
         background: "linear-gradient(160deg, #1e1b4b 0%, #3b1275 30%, #6d1bb5 65%, #c2185b 100%)",
       }}
@@ -777,8 +777,14 @@ export function QuoteGenerator() {
         </div>
       </div>
 
-      {/* Main content area — document scroll, padded top for fixed bar */}
-      <div className="relative z-10 flex flex-col items-center px-3 pb-20 pt-9">
+      {/* Main content area — document scroll, padded top for fixed bar + safe area */}
+      <div
+        className="relative z-10 flex flex-col items-center px-3"
+        style={{
+          paddingTop: 'calc(2.25rem + env(safe-area-inset-top, 0px))',
+          paddingBottom: 'calc(8rem + env(safe-area-inset-bottom, 0px))',
+        }}
+      >
         {/* Install prompt — the ONLY way to remove Safari address bar on iPhone */}
         {showInstallBanner && (
           <div className="w-full max-w-md mb-1 px-1">
