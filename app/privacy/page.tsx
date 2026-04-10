@@ -50,14 +50,6 @@ export default function PrivacyPage() {
               </p>
             </section>
 
-            {/* Cookies and Ads */}
-            <section className="space-y-3">
-              <h2 className="font-serif text-xl font-semibold text-white">Cookies and Advertising</h2>
-              <p className="leading-relaxed">
-                If you access QuoteApp through a web version, Google AdSense may use cookies to serve personalized ads based on your browsing history. These cookies are managed by Google and subject to their own privacy policies. You can control cookie settings through your browser preferences.
-              </p>
-            </section>
-
             {/* Third-Party Services */}
             <section className="space-y-3">
               <h2 className="font-serif text-xl font-semibold text-white">Third-Party Services</h2>

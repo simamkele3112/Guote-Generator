@@ -47,7 +47,7 @@ export function PremiumBanner({ quotesUsed, limit }: PremiumBannerProps) {
       </button>
 
       <div className="mt-3 flex justify-center gap-4">
-        {["Unlimited quotes", "No ads", "Exclusive categories"].map((feature) => (
+        {["Unlimited quotes", "2× XP boost", "Exclusive categories"].map((feature) => (
           <span key={feature} className="flex items-center gap-1 text-[11px] text-muted-foreground font-sans">
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500/60" aria-hidden="true" />
             {feature}

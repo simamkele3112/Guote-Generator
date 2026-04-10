@@ -95,7 +95,6 @@ export function QuoteGenerator() {
   const [dailyReads, setDailyReads] = useState(0)
   const [dailyShares, setDailyShares] = useState(0)
   const [dailySaves, setDailySaves] = useState(0)
-  const [adsSeenCount, setAdsSeenCount] = useState(0)
   const prevUnlockedCountRef = useRef(0)
   const [levelUpNum, setLevelUpNum] = useState<number | null>(null)
   const [welcomeMessage, setWelcomeMessage] = useState<string | null>(null)
@@ -370,11 +369,6 @@ export function QuoteGenerator() {
     if (typeof window !== "undefined") {
       const todayKey = new Date().toDateString()
       const saved = localStorage.getItem("dailyQuestData")
-      const adsKey = localStorage.getItem("quoteAppAdsSeenDate")
-      const adsCount = localStorage.getItem("quoteAppAdsSeen") || "0"
-      if (adsKey === todayKey) {
-        setAdsSeenCount(parseInt(adsCount, 10))
-      }
       if (saved) {
         try {
           const data = JSON.parse(saved)
@@ -965,7 +959,7 @@ export function QuoteGenerator() {
             <Crown className="h-5 w-5 text-amber-400" />
             <div className="text-left flex-1">
               <p className="font-semibold text-white text-sm">Go Premium</p>
-              <p className="text-xs text-white/60">Unlimited quotes, no ads</p>
+              <p className="text-xs text-white/60">Unlimited quotes + 2× XP</p>
             </div>
           </button>
 
@@ -1021,7 +1015,6 @@ export function QuoteGenerator() {
             setShowPremiumInfo(false)
             setShowPaymentModal(true)
           }}
-          adsSeenCount={adsSeenCount}
           itemsUsed={totalContentViewed}
           freeLimit={FREE_LIMIT}
         />

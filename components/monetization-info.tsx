@@ -1,22 +1,15 @@
 "use client"
 
-import { Crown, Zap, BarChart3, TrendingUp } from "lucide-react"
+import { Crown, Zap, TrendingUp } from "lucide-react"
 
 export function MonetizationInfo() {
   const strategies = [
     {
       title: "Premium Subscription",
-      description: "Unlimited quotes, no ads, exclusive features",
-      price: "$2.99/month or $19.99/year",
-      benefits: ["Unlimited daily quotes", "Ad-free experience", "Exclusive categories", "Advanced stats"],
+      description: "Unlimited quotes, exclusive features",
+      price: "R30/month or R360/year",
+      benefits: ["Unlimited daily quotes", "Exclusive categories", "Advanced stats", "2× XP boost"],
       icon: Crown,
-    },
-    {
-      title: "Non-invasive Ads",
-      description: "Subtle banner ads for free users",
-      revenue: "CPM-based advertising",
-      benefits: ["Between-session ads", "Reward video option", "Respects user experience"],
-      icon: BarChart3,
     },
     {
       title: "Affiliate Links",

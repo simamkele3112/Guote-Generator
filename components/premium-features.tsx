@@ -1,17 +1,15 @@
 "use client"
 
-import { Sparkles, Zap, Eye, BarChart3, CheckCircle2, Flame, Shield, Star, Infinity, Image } from "lucide-react"
+import { Sparkles, Zap, BarChart3, CheckCircle2, Flame, Shield, Star, Infinity, Image } from "lucide-react"
 
 interface PremiumFeaturesProps {
   isPremium?: boolean
   onUpgrade?: () => void
-  adsSeenCount?: number
   itemsUsed?: number
   freeLimit?: number
 }
 
 const FREE_BENEFITS = [
-  { icon: Eye,      title: "Ad-Free Forever",           description: "No more ads interrupting your focus. Clean, pure inspiration." },
   { icon: Infinity, title: "Unlimited Everything",       description: "All quotes, Bible insights & study tips with zero daily cap." },
   { icon: Zap,      title: "Permanent 2× XP Boost",    description: "Every quote, insight and tip earns double XP — level up twice as fast." },
   { icon: Flame,    title: "Streak Freeze",              description: "Broke your streak? Use a free freeze once a week to protect it." },
@@ -24,7 +22,6 @@ const FREE_BENEFITS = [
 export function PremiumFeatures({
   isPremium = false,
   onUpgrade,
-  adsSeenCount = 0,
   itemsUsed = 0,
   freeLimit = 20,
 }: PremiumFeaturesProps) {
@@ -46,7 +43,7 @@ export function PremiumFeatures({
             </div>
             <div>
               <p className="font-bold text-green-400 text-lg leading-tight">Premium Active ✨</p>
-              <p className="text-xs text-white/60 mt-0.5">Full access · No ads · 2× XP active</p>
+              <p className="text-xs text-white/60 mt-0.5">Full access · 2× XP active · All features unlocked</p>
             </div>
           </div>
         ) : (
@@ -78,12 +75,6 @@ export function PremiumFeatures({
                   />
                 </div>
               </div>
-            )}
-
-            {adsSeenCount > 0 && (
-              <p className="text-xs text-white/50 mb-3">
-                🙈 You've seen <span className="text-amber-400 font-semibold">{adsSeenCount} ad{adsSeenCount !== 1 ? "s" : ""}</span> today — go premium to remove them all.
-              </p>
             )}
 
             <div className="flex items-center gap-2 text-xs text-green-400 font-semibold">
