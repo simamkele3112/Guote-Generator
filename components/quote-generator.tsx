@@ -18,7 +18,6 @@ import { SocialShareImage } from "./social-share-image"
 import { PremiumFeatures } from "./premium-features"
 import { AppAbout } from "./app-about"
 import { DonationSection } from "./donation-section"
-import { AdBanner } from "./ad-banner"
 import { PaymentModal } from "./payment-modal"
 
 const FREE_LIMIT = 20
@@ -817,13 +816,6 @@ export function QuoteGenerator() {
         <div className="w-full max-w-md mb-1 px-1">
           <CategoryFilter selected={category} onChange={handleCategoryChange} />
         </div>
-
-        {/* Ad Banner - Free users only */}
-{!isPremium && (
-  <div className="w-full max-w-md mb-1 px-1">
-    <AdBanner />
-  </div>
-)}
 
         {/* Main quote card - centered and prominent */}
         {quote ? (
